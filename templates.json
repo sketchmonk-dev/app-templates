@@ -47,25 +47,29 @@
           "name": "CORE_IMAGE",
           "label": "Core Image",
           "description": "Container image reference for the core API service.",
-          "default": "registry.gitlab.com/sketchmonkdev/bookable/core"
+          "default": "registry.gitlab.com/sketchmonkdev/bookable/core",
+          "preset": true
         },
         {
           "name": "WEB_IMAGE",
           "label": "Web Image",
           "description": "Container image reference for the frontend web service.",
-          "default": "registry.gitlab.com/sketchmonkdev/bookable/web"
+          "default": "registry.gitlab.com/sketchmonkdev/bookable/web",
+          "preset": true
         },
         {
           "name": "BACKOFFICE_IMAGE",
           "label": "Backoffice Image",
           "description": "Container image reference for the backoffice/admin UI service.",
-          "default": "registry.gitlab.com/sketchmonkdev/bookable/backoffice"
+          "default": "registry.gitlab.com/sketchmonkdev/bookable/backoffice",
+          "preset": true
         },
         {
           "name": "MIGRATION_IMAGE",
           "label": "Migration Image",
           "description": "Container image reference for the database migration job.",
-          "default": "registry.gitlab.com/sketchmonkdev/bookable/migration"
+          "default": "registry.gitlab.com/sketchmonkdev/bookable/migration",
+          "preset": true
         },
         {
           "name": "VERSION",

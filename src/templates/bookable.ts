@@ -19,7 +19,7 @@ const template: Template = {
       name: "NAME",
       label: "Project Name",
       description: "Project name used for the deployment using docker compose.",
-      default: "bookable"
+      default: "bookable",
     },
     {
       name: "HOSTNAME",
@@ -45,32 +45,37 @@ const template: Template = {
       name: "CORE_IMAGE",
       label: "Core Image",
       description: "Container image reference for the core API service.",
-      default: "registry.gitlab.com/sketchmonkdev/bookable/core"
+      default: "registry.gitlab.com/sketchmonkdev/bookable/core",
+      preset: true,
     },
     {
       name: "WEB_IMAGE",
       label: "Web Image",
       description: "Container image reference for the frontend web service.",
-      default: "registry.gitlab.com/sketchmonkdev/bookable/web"
+      default: "registry.gitlab.com/sketchmonkdev/bookable/web",
+      preset: true,
     },
     {
       name: "BACKOFFICE_IMAGE",
       label: "Backoffice Image",
       description:
         "Container image reference for the backoffice/admin UI service.",
-      default: "registry.gitlab.com/sketchmonkdev/bookable/backoffice"
+      default: "registry.gitlab.com/sketchmonkdev/bookable/backoffice",
+      preset: true,
     },
     {
       name: "MIGRATION_IMAGE",
       label: "Migration Image",
       description: "Container image reference for the database migration job.",
-      default: "registry.gitlab.com/sketchmonkdev/bookable/migration"
+      default: "registry.gitlab.com/sketchmonkdev/bookable/migration",
+      preset: true,
     },
     {
-        name: "VERSION",
-        label: "Version",
-        description: "Version tag for the images. This will override the default image tags if specified.",
-        default: "latest"
+      name: "VERSION",
+      label: "Version",
+      description:
+        "Version tag for the images. This will override the default image tags if specified.",
+      default: "latest",
     },
     {
       name: "BETTER_AUTH_SECRET",
@@ -81,13 +86,13 @@ const template: Template = {
       name: "ADMIN_EMAIL",
       label: "Admin Email",
       description: "Default administrator email for initial login.",
-      default: "admin@example.com"
+      default: "admin@example.com",
     },
     {
       name: "ADMIN_PASSWORD",
       label: "Admin Password",
       description: "Default administrator password for initial login.",
-      default: "pass@admin123"
+      default: "pass@admin123",
     },
     {
       name: "R2_ACCOUNT_ID",
