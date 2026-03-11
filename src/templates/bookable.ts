@@ -86,13 +86,11 @@ const template: Template = {
       name: "ADMIN_EMAIL",
       label: "Admin Email",
       description: "Default administrator email for initial login.",
-      default: "admin@example.com",
     },
     {
       name: "ADMIN_PASSWORD",
       label: "Admin Password",
       description: "Default administrator password for initial login.",
-      default: "pass@admin123",
     },
     {
       name: "R2_ACCOUNT_ID",

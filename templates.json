@@ -85,14 +85,12 @@
         {
           "name": "ADMIN_EMAIL",
           "label": "Admin Email",
-          "description": "Default administrator email for initial login.",
-          "default": "admin@example.com"
+          "description": "Default administrator email for initial login."
         },
         {
           "name": "ADMIN_PASSWORD",
           "label": "Admin Password",
-          "description": "Default administrator password for initial login.",
-          "default": "pass@admin123"
+          "description": "Default administrator password for initial login."
         },
         {
           "name": "R2_ACCOUNT_ID",
