@@ -1,4 +1,4 @@
-import { LOGOS_URL, REPOSITORY_RAW_URL, REPOSITORY_URL } from "@/constant";
+import { LOGOS_URL, REPOSITORY_URL } from "@/constant";
 import { TemplateType, type Template } from "@/types";
 
 const template: Template = {
@@ -7,7 +7,7 @@ const template: Template = {
   name: "bookable",
   logo: `${LOGOS_URL}/bookable.svg`,
   platform: "linux",
-  categories: ["application", "erp"],
+  categories: ["Application", "ERP"],
   description:
     "A modern booking system for service-based businesses, built with Bun, Elysia, Next.js, and PostgreSQL.",
   repository: {
@@ -19,6 +19,7 @@ const template: Template = {
       name: "NAME",
       label: "Project Name",
       description: "Project name used for the deployment using docker compose.",
+      default: "bookable"
     },
     {
       name: "HOSTNAME",
@@ -44,37 +45,49 @@ const template: Template = {
       name: "CORE_IMAGE",
       label: "Core Image",
       description: "Container image reference for the core API service.",
+      default: "registry.gitlab.com/sketchmonkdev/bookable/core"
     },
     {
       name: "WEB_IMAGE",
       label: "Web Image",
       description: "Container image reference for the frontend web service.",
+      default: "registry.gitlab.com/sketchmonkdev/bookable/web"
     },
     {
       name: "BACKOFFICE_IMAGE",
       label: "Backoffice Image",
       description:
         "Container image reference for the backoffice/admin UI service.",
+      default: "registry.gitlab.com/sketchmonkdev/bookable/backoffice"
     },
     {
       name: "MIGRATION_IMAGE",
       label: "Migration Image",
       description: "Container image reference for the database migration job.",
+      default: "registry.gitlab.com/sketchmonkdev/bookable/migration"
+    },
+    {
+        name: "VERSION",
+        label: "Version",
+        description: "Version tag for the images. This will override the default image tags if specified.",
+        default: "latest"
     },
     {
       name: "BETTER_AUTH_SECRET",
-      label: "Auth Secret",
+      label: "Better Auth Secret",
       description: "Secret key used for authentication and session signing.",
     },
     {
       name: "ADMIN_EMAIL",
       label: "Admin Email",
       description: "Default administrator email for initial login.",
+      default: "admin@example.com"
     },
     {
       name: "ADMIN_PASSWORD",
       label: "Admin Password",
       description: "Default administrator password for initial login.",
+      default: "pass@admin123"
     },
     {
       name: "R2_ACCOUNT_ID",
