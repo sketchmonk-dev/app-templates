@@ -1,0 +1,100 @@
+import { LOGOS_URL, REPOSITORY_RAW_URL, REPOSITORY_URL } from "@/constant";
+import { TemplateType, type Template } from "@/types";
+
+const template: Template = {
+  type: TemplateType.ComposeStack,
+  title: "Bookable",
+  name: "bookable",
+  logo: `${LOGOS_URL}/bookable.svg`,
+  description:
+    "A modern booking system for service-based businesses, built with Bun, Elysia, Next.js, and PostgreSQL.",
+  repository: {
+    url: REPOSITORY_URL,
+    stackfile: "stacks/bookable/docker-compose.yml",
+  },
+  env: [
+    {
+      name: "NAME",
+      label: "Project Name",
+      description: "Project name used for the deployment using docker compose.",
+    },
+    {
+      name: "HOSTNAME",
+      label: "Hostname",
+      description: "Public hostname used to access the application.",
+    },
+    {
+      name: "DB_USER",
+      label: "Database User",
+      description: "PostgreSQL username used by the app.",
+    },
+    {
+      name: "DB_PASSWORD",
+      label: "Database Password",
+      description: "PostgreSQL password for the database user.",
+    },
+    {
+      name: "DB_NAME",
+      label: "Database Name",
+      description: "PostgreSQL database name used by the app.",
+    },
+    {
+      name: "CORE_IMAGE",
+      label: "Core Image",
+      description: "Container image reference for the core API service.",
+    },
+    {
+      name: "WEB_IMAGE",
+      label: "Web Image",
+      description: "Container image reference for the frontend web service.",
+    },
+    {
+      name: "BACKOFFICE_IMAGE",
+      label: "Backoffice Image",
+      description:
+        "Container image reference for the backoffice/admin UI service.",
+    },
+    {
+      name: "MIGRATION_IMAGE",
+      label: "Migration Image",
+      description: "Container image reference for the database migration job.",
+    },
+    {
+      name: "BETTER_AUTH_SECRET",
+      label: "Auth Secret",
+      description: "Secret key used for authentication and session signing.",
+    },
+    {
+      name: "ADMIN_EMAIL",
+      label: "Admin Email",
+      description: "Default administrator email for initial login.",
+    },
+    {
+      name: "ADMIN_PASSWORD",
+      label: "Admin Password",
+      description: "Default administrator password for initial login.",
+    },
+    {
+      name: "R2_ACCOUNT_ID",
+      label: "R2 Account ID",
+      description: "Cloudflare R2 account identifier.",
+    },
+    {
+      name: "R2_ACCESS_KEY_ID",
+      label: "R2 Access Key ID",
+      description: "Access key ID for Cloudflare R2 storage.",
+    },
+    {
+      name: "R2_SECRET_ACCESS_KEY",
+      label: "R2 Secret Access Key",
+      description: "Secret access key for Cloudflare R2 storage.",
+    },
+    {
+      name: "R2_BUCKET_NAME",
+      label: "R2 Bucket Name",
+      description: "Bucket name used for file storage.",
+    },
+  ],
+};
+
+export default template;

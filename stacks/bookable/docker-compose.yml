@@ -1,0 +1,92 @@
+name: ${NAME:-bookable}
+services:
+  postgres:
+    hostname: ${NAME:-bookable}-postgres
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ${DB_USER:-bookable}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-bookable}
+      POSTGRES_DB: ${DB_NAME:-bookabledb}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - private
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  core:
+    hostname: ${NAME:-bookable}-core
+    image: ${CORE_IMAGE}:${VERSION:-latest}
+    environment:
+      LOG_LEVEL: trace
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      BETTER_AUTH_URL: https://${HOSTNAME}
+      BETTER_AUTH_COOKIE_DOMAIN: ${HOSTNAME}
+      BETTER_AUTH_TRUSTED_ORIGINS: https://${HOSTNAME},https://admin.${HOSTNAME}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      PUBLIC_SERVER_URL: http://${HOSTNAME}
+      WINDOW_SIZE: 30m
+      DATABASE_URL: postgresql://${DB_USER:-bookable}:${DB_PASSWORD:-bookable}@postgres:5432/${DB_NAME:-bookabledb}
+      R2_ACCOUNT_ID: ${R2_ACCOUNT_ID}
+      R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID}
+      R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY}
+      R2_BUCKET_NAME: ${R2_BUCKET_NAME}
+    networks:
+      - public
+      - private
+    labels:
+      caddy_0: ${HOSTNAME}
+      caddy_0.handle: /api/*
+      caddy_0.handle.reverse_proxy: "{{ upstreams 3300 }}"
+      caddy_1: admin.${HOSTNAME}
+      caddy_1.handle: /api/*
+      caddy_1.handle.reverse_proxy: "{{ upstreams 3300 }}"
+      caddy_2: api.${HOSTNAME}
+      caddy_2.handle: /*
+      caddy_2.handle.reverse_proxy: "{{ upstreams 3300 }}"
+    depends_on:
+      postgres:
+        condition: service_started
+      migration:
+        condition: service_completed_successfully
+  backoffice:
+    hostname: ${NAME:-bookable}-backoffice
+    image: ${BACKOFFICE_IMAGE}:${VERSION:-latest}
+    environment:
+      SERVER_URL: http://${NAME:-bookable}-core:3300
+    networks:
+      - public
+    labels:
+      caddy: admin.${HOSTNAME}
+      caddy.handle: /*
+      caddy.handle.reverse_proxy: "{{ upstreams 3000 }}"
+  web:
+    hostname: ${NAME:-bookable}-web
+    image: ${WEB_IMAGE}:${VERSION:-latest}
+    environment:
+      SERVER_URL: http://${NAME:-bookable}-core:3300
+    networks:
+      - public
+    labels:
+      caddy: ${HOSTNAME}
+      caddy.handle: /*
+      caddy.handle.reverse_proxy: "{{ upstreams 3000 }}"
+  migration:
+    hostname: ${NAME:-bookable}-migration
+    image: ${MIGRATION_IMAGE}:${VERSION:-latest}
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-bookable}:${DB_PASSWORD:-bookable}@postgres:5432/${DB_NAME:-bookabledb}
+    networks:
+      - private
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  postgres_data:
+networks:
+  public:
+    external: true
+  private:
