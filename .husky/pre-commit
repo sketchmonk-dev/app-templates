@@ -1,1 +1,2 @@
 bun run compile
+git add templates.json
