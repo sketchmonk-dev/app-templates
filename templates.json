@@ -6,6 +6,11 @@
       "title": "Bookable",
       "name": "bookable",
       "logo": "https://raw.githubusercontent.com/sketchmonk-dev/app-templates/refs/heads/main/assets/logos/bookable.svg",
+      "platform": "linux",
+      "categories": [
+        "application",
+        "erp"
+      ],
       "description": "A modern booking system for service-based businesses, built with Bun, Elysia, Next.js, and PostgreSQL.",
       "repository": {
         "url": "https://github.com/sketchmonk-dev/app-templates",

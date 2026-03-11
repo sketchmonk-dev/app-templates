@@ -6,6 +6,8 @@ const template: Template = {
   title: "Bookable",
   name: "bookable",
   logo: `${LOGOS_URL}/bookable.svg`,
+  platform: "linux",
+  categories: ["application", "erp"],
   description:
     "A modern booking system for service-based businesses, built with Bun, Elysia, Next.js, and PostgreSQL.",
   repository: {
